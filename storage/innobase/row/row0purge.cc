@@ -1076,9 +1076,7 @@ try_again:
 	ut_ad(!node->table->is_temporary());
 
 	if (!fil_table_accessible(node->table)) {
-		dict_table_close(node->table, FALSE, FALSE);
-		node->table = NULL;
-		goto err_exit;
+		goto close_exit;
 	}
 
 	switch (type) {
@@ -1112,7 +1110,9 @@ try_again:
 		/* The table was corrupt in the data dictionary.
 		dict_set_corrupted() works on an index, and
 		we do not have an index to call it with. */
+close_exit:
 		dict_table_close(node->table, FALSE, FALSE);
+		node->table = NULL;
 err_exit:
 		rw_lock_s_unlock(dict_operation_lock);
 		return(false);

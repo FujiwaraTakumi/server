@@ -997,6 +997,8 @@ struct export_var_t{
 	ulint innodb_truncated_status_writes;	/*!< srv_truncated_status_writes */
 	ulint innodb_available_undo_logs;       /*!< srv_available_undo_logs
 						*/
+	/** Number of undo tablespace truncation operations */
+	ulong innodb_undo_truncations;
 	ulint innodb_defragment_compression_failures; /*!< Number of
 						defragment re-compression
 						failures */
@@ -1013,12 +1015,6 @@ struct export_var_t{
 	ulint innodb_onlineddl_rowlog_pct_used; /*!< Online alter percentage
 						of used row log buffer */
 	ulint innodb_onlineddl_pct_progress;	/*!< Online alter progress */
-
-#ifdef UNIV_DEBUG
-	ulint innodb_ahi_drop_lookups;		/*!< number of adaptive hash
-						index lookups when freeing
-						file pages */
-#endif /* UNIV_DEBUG */
 
 	int64_t innodb_page_compression_saved;/*!< Number of bytes saved
 						by page compression */
